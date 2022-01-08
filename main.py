@@ -9,7 +9,6 @@ for filename in glob.glob('./images/*.jpg'):
     size_2 = int(size / 3)
 
     roi = img_o
-    # roi = img_o[0:size_2, size_2:size]
     roi_90 = cv2.rotate(roi, cv2.ROTATE_90_CLOCKWISE)
     roi_180 = cv2.rotate(roi, cv2.ROTATE_180)
     roi_270 = cv2.rotate(roi, cv2.ROTATE_90_COUNTERCLOCKWISE)
