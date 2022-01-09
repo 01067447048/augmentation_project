@@ -1,7 +1,11 @@
 import cv2
 import glob
 
-for filename in glob.glob('./images/*.jpg'):
+type_jpeg = "jpeg"
+type_jpg = "jpg"
+type_png = "png"
+
+for filename in glob.glob('./images/*.' + type_jpg):
     img_o = cv2.imread(filename)
     img_g = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 
@@ -17,4 +21,9 @@ for filename in glob.glob('./images/*.jpg'):
     roi[size_2:size, 0:size_2*2] = roi_180[size_2:size, 0:size_2*2]
     roi[0:size_2*2, 0:size_2] = roi_270[0:size_2*2, 0:size_2]
 
-    cv2.imwrite(filename.replace('./images', './augmentationImages'), roi)
+    if filename.find(type_jpeg):
+        cv2.imwrite(filename.replace('./images', './augmentationImages').replace(type_jpeg, type_jpg), roi)
+    elif filename.find(type_png):
+        cv2.imwrite(filename.replace('./images', './augmentationImages').replace(type_png, type_jpg), roi)
+    else:
+        cv2.imwrite(filename.replace('./images', './augmentationImages'), roi)
